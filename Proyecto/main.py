@@ -4,8 +4,10 @@
 
 import pygame
 import sys
+import random
 from settings import *
 from src.jugador import Jugador
+from src.moneda import Moneda
 
 # Inicialización de Pygame y configuración de la ventana de juego.
 pygame.init()
@@ -28,6 +30,11 @@ todos    = pygame.sprite.Group()
 plataformas = pygame.sprite.Group()
 
 # Crear el jugador y añadirlo al grupo principal de sprites.
+moneda = Moneda(
+    random.randint(50, ANCHO - 50),
+    random.randint(50, ALTO - 50)
+)
+todos.add(moneda)
 jugador = Jugador(100, 400)
 todos.add(jugador)
 
@@ -37,6 +44,7 @@ datos_plataformas = [
     (100, 420, 200, 20),   # Plataforma 1
     (380, 320, 160, 20),   # Plataforma 2
     (550, 220, 200, 20),   # Plataforma 3
+    (300, 120, 90,  20)    # Plataforma 4
 ]
 for datos in datos_plataformas:
     p = Plataforma(*datos)
@@ -59,6 +67,7 @@ while True:
 
     # Actualizar el jugador con información de las plataformas para detectar colisiones.
     jugador.update(plataformas)
+    puntaje += moneda.update(jugador)
 
     # Dibujar el fondo, los sprites y la interfaz de puntaje.
     ventana.fill(NEGRO)

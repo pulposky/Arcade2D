@@ -34,10 +34,13 @@ class Jugador(pygame.sprite.Sprite):
         # Leer el estado actual de las teclas.
         teclas = pygame.key.get_pressed()
         self.vel_x = 0
+        self.rect.x = max(0, min(self.rect.x, ANCHO - self.rect.width))  # Limitar dentro de la pantalla
+        self.rect.y = max(0, min(self.rect.y, ALTO - self.rect.height))  # Limitar dentro de la pantalla
         if teclas[pygame.K_LEFT]  or teclas[pygame.K_a]:
             self.vel_x = -VELOCIDAD_JUGADOR
         if teclas[pygame.K_RIGHT] or teclas[pygame.K_d]:
             self.vel_x =  VELOCIDAD_JUGADOR
+            
 
     def saltar(self):
         # Solo saltar si el jugador está en el suelo.
@@ -76,4 +79,3 @@ class Jugador(pygame.sprite.Sprite):
                 # Rebote de la cabeza contra la parte inferior de una plataforma.
                 self.rect.top    = p.rect.bottom
                 self.vel_y       = 0
-
