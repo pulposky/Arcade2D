@@ -4,10 +4,12 @@
 
 import pygame
 import sys
+import time
 import random
 from settings import *
 from src.jugador import Jugador
 from src.moneda import Moneda
+from src.enemigo import Enemigo
 
 # Inicialización de Pygame y configuración de la ventana de juego.
 pygame.init()
@@ -38,13 +40,20 @@ todos.add(moneda)
 jugador = Jugador(100, 400)
 todos.add(jugador)
 
+enemigos       = pygame.sprite.Group()
+ultimo_spawn   = time.time()
+intervalo_spawn = 3  # segundos entre cada enemigo
+game_over      = False
+pausado = False
+
 # Definición de plataformas fijas: suelo y plataformas intermedias.
 datos_plataformas = [
     (0,   560, 800, 40),   # Suelo del nivel
     (100, 420, 200, 20),   # Plataforma 1
     (380, 320, 160, 20),   # Plataforma 2
     (550, 220, 200, 20),   # Plataforma 3
-    (300, 120, 90,  20)    # Plataforma 4
+    (300, 120, 90,  20),    # Plataforma 4
+    (580, 420, 90,  20)    # Plataforma 5
 ]
 for datos in datos_plataformas:
     p = Plataforma(*datos)
@@ -58,24 +67,62 @@ puntaje = 0
 while True:
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
-            # Cierre limpio de Pygame y salida del programa.
             pygame.quit(); sys.exit()
         if evento.type == pygame.KEYDOWN:
-            if evento.key == pygame.K_SPACE:
-                # Saltar cuando se pulsa la tecla espacio.
+            if evento.key == pygame.K_ESCAPE:
+                pausado = not pausado
+            if evento.key == pygame.K_SPACE and not game_over:
                 jugador.saltar()
+            if evento.key == pygame.K_r and game_over:
+                # Eliminar enemigos de AMBOS grupos
+                for e in enemigos:
+                    todos.remove(e)
+                enemigos.empty()
+                
+                jugador.rect.topleft = (100, 400)
+                puntaje = 0
+                game_over = False
 
-    # Actualizar el jugador con información de las plataformas para detectar colisiones.
-    jugador.update(plataformas)
-    puntaje += moneda.update(jugador)
+    if not game_over and not pausado:
+        jugador.update(plataformas)
 
-    # Dibujar el fondo, los sprites y la interfaz de puntaje.
+        # Spawn de enemigos cada X segundos
+        if time.time() - ultimo_spawn > intervalo_spawn:
+            nuevo = Enemigo()
+            enemigos.add(nuevo)
+            todos.add(nuevo)
+            ultimo_spawn = time.time()
+
+        for enemigo in enemigos:
+            enemigo.update(jugador)
+
+        moneda_recogida = moneda.update(jugador)
+        puntaje += moneda_recogida
+        if moneda_recogida:
+            for e in enemigos:
+                e.aumentar_velocidad()
+
+        # Comprobar colisión con cualquier enemigo
+        if pygame.sprite.spritecollide(jugador, enemigos, False):
+            game_over = True
+
+    # Dibujar
     ventana.fill(NEGRO)
     todos.draw(ventana)
+    enemigos.draw(ventana)
 
     txt = fuente.render(f'Puntaje: {puntaje}', True, BLANCO)
     ventana.blit(txt, (20, 20))
+    
+    if pausado:
+        txt_pausa = fuente.render('PAUSA', True, BLANCO)
+        ventana.blit(txt_pausa, (ANCHO//2 - txt_pausa.get_width()//2, ALTO//2))
+    
+    if game_over:
+        go  = fuente.render('GAME OVER', True, ROJO)
+        rst = fuente.render('Presiona R para reiniciar', True, BLANCO)
+        ventana.blit(go,  (ANCHO//2 - go.get_width()//2,  ALTO//2 - 30))
+        ventana.blit(rst, (ANCHO//2 - rst.get_width()//2, ALTO//2 + 10))
 
-    # Actualizar la pantalla y sincronizar los FPS.
     pygame.display.flip()
     reloj.tick(FPS)
