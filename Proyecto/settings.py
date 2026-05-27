@@ -16,6 +16,8 @@ AZUL   = (0,   120, 255)
 VERDE  = (50,  200, 50)
 ROJO   = (220, 50,  50)
 GRIS   = (80,  80,  80)
+AMARILLO = (255, 215, 0)
+CELESTE  = (0, 200, 255)
 
 # Constantes de movimiento del jugador.
 # VELOCIDAD_JUGADOR controla la velocidad horizontal.
