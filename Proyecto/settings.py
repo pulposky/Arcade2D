@@ -24,5 +24,5 @@ CELESTE  = (0, 200, 255)
 # FUERZA_SALTO define el impulso inicial hacia arriba al saltar.
 # GRAVEDAD aplica aceleración constante hacia abajo.
 VELOCIDAD_JUGADOR = 5
-FUERZA_SALTO      = -14
+FUERZA_SALTO      = -16
 GRAVEDAD          = 0.6
