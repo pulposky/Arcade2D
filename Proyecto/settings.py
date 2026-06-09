@@ -18,6 +18,7 @@ ROJO   = (220, 50,  50)
 GRIS   = (80,  80,  80)
 AMARILLO = (255, 215, 0)
 CELESTE  = (0, 200, 255)
+MORADO   = (150, 70, 220)
 
 # Constantes de movimiento del jugador.
 # VELOCIDAD_JUGADOR controla la velocidad horizontal.
@@ -26,3 +27,9 @@ CELESTE  = (0, 200, 255)
 VELOCIDAD_JUGADOR = 5
 FUERZA_SALTO      = -16
 GRAVEDAD          = 0.6
+
+# Progresion arcade del mundo.
+ANCHO_MUNDO_INICIAL = ANCHO
+ANCHO_MUNDO_MAXIMO  = 3200
+EXPANSION_MUNDO     = 450
+ANCHO_VENTANA_MAXIMO = 1800

@@ -13,10 +13,11 @@ class Jugador(pygame.sprite.Sprite):
         self.en_suelo  = False
         self.velocidad = VELOCIDAD_JUGADOR  # ← permite modificarse con power-up
 
-    def update(self, plataformas):
+    def update(self, plataformas, ancho_mundo=ANCHO):
         self.mover()
         self.aplicar_gravedad()
         self.rect.x += self.vel_x
+        self.rect.x = max(0, min(self.rect.x, ancho_mundo - self.rect.width))
         self.colision_horizontal(plataformas)
         self.rect.y += self.vel_y
         self.colision_vertical(plataformas)
@@ -24,7 +25,6 @@ class Jugador(pygame.sprite.Sprite):
     def mover(self):
         teclas = pygame.key.get_pressed()
         self.vel_x = 0
-        self.rect.x = max(0, min(self.rect.x, ANCHO - self.rect.width))
         self.rect.y = max(0, min(self.rect.y, ALTO  - self.rect.height))
         if teclas[pygame.K_LEFT]  or teclas[pygame.K_a]:
             self.vel_x = -self.velocidad
