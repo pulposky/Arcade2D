@@ -13,8 +13,8 @@ Juego de Blackjack clásico desarrollado en Python usando Pygame. Experimenta la
 
 ## 📋 Requisitos
 
-- Python 3.7 o superior
-- Pygame 2.5.2
+- Python 3.13
+- Pygame 2.6.1
 
 ## 🚀 Instalación
 
