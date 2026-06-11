@@ -1,5 +1,5 @@
 [project]
-name = "shooters"
+name = "plataformas"
 version = "0.1.0"
 description = "Juego de plataformas hecho con Pygame"
 readme = "README.md"
