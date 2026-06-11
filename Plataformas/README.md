@@ -18,8 +18,8 @@ Un juego de plataformas 2D desarrollado en **Python** y **Pygame**, donde el obj
 
 ## 🛠️ Tecnologías
 
-- Python 3
-- Pygame
+- Python 3.13
+- Pygame 2.6.1
 
 ## 🚀 Instalación
 
