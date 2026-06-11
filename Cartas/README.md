@@ -1,4 +1,4 @@
-"# 🎰 Blackjack - Casino 21
+🎰 Blackjack - Casino 21
 
 Juego de Blackjack clásico desarrollado en Python usando Pygame. Experimenta la emoción del casino con gráficos generados por código y un sistema completo de apuestas.
 
@@ -153,29 +153,6 @@ WIDTH = 1000
 HEIGHT = 700
 ```
 
-## 🐛 Solución de Problemas
-
-**El juego no inicia:**
-- Verifica que Pygame esté instalado: `pip install pygame`
-- Comprueba la versión de Python: `python --version` (debe ser 3.7+)
-
-**Las cartas no se muestran correctamente:**
-- Asegúrate de que todas las fuentes del sistema estén disponibles
-- Pygame inicializa fuentes automáticamente
-
-**Error de importación:**
-- Ejecuta desde el directorio raíz: `/app/`
-- Verifica que la carpeta `src/` exista con todos los archivos
-
-## 🎓 Posibles Mejoras Futuras
-
-- [ ] Agregar sonidos (barajar, repartir, ganar/perder)
-- [ ] Implementar reglas avanzadas (dividir, doblar, seguro)
-- [ ] Modo multijugador local
-- [ ] Sistema de estadísticas y récords
-- [ ] Animaciones de cartas
-- [ ] Diferentes temas visuales
-- [ ] Guardar progreso del jugador
 
 ## 📝 Licencia
 
@@ -184,11 +161,6 @@ Este proyecto es de código abierto y está disponible bajo la licencia MIT.
 ## 👨‍💻 Autor
 
 Desarrollado como proyecto educativo de Python y Pygame.
-
-## 🙏 Agradecimientos
-
-- Pygame community por la excelente documentación
-- Reglas de Blackjack basadas en estándares de casinos
 
 ---
 
